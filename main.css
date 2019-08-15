@@ -1,5 +1,5 @@
 body {
-  background: #943939;
+  background: #ccc;
   color: #666;
   font-family: "Arial", sans-serif;
 }
@@ -17,7 +17,7 @@ h1 {
   width: 380px;
   overflow: auto;
   margin: 40px auto;
-  background: #d43d3d;
+  background: #396094;
   padding-bottom: 40px;
   border-radius: 10px;
 }
@@ -29,7 +29,7 @@ h1 {
   margin: 10px;
   height: 80px;
   width: 80px;
-  font-size: 1rem;
+  font-size: 4rem;
   background: #333;
   color: #ccc;
   list-style-type: none;
@@ -42,11 +42,17 @@ h1 {
   background: #666;
 }
 
+footer {
+  text-align: center;
+  padding-top: 20px;
+}
+
 #reset {
   border: 0;
   margin: 5px auto;
   background: #444;
   color: #fff;
+  font-size: 1rem;
   width: 75%;
   padding: 20px;
   border-radius: 5px;
@@ -63,9 +69,4 @@ h1 {
 
 .x {
   color: red !important;
-}
-
-footer {
-  text-align: center;
-  padding-top: 20px;
 }
