@@ -1,8 +1,7 @@
-// JQUERY
-$(document).ready(function() {
-  let x = "x";
-  let o = "o";
-  turns = 0;
+$(document).ready(function () {
+  const boardList = $("#board li");
+  let turns = 0;
+
   let spot1 = $("#spot1");
   let spot2 = $("#spot2");
   let spot3 = $("#spot3");
@@ -13,7 +12,15 @@ $(document).ready(function() {
   let spot8 = $("#spot8");
   let spot9 = $("#spot9");
 
-  $("#board li").on("click", function() {
+  const refreshBoard = () => {
+    boardList.removeClass("disabled");
+    boardList.text("*");
+    boardList.removeClass("o");
+    boardList.removeClass("x");
+    turns = 0;
+  };
+
+  boardList.on("click", function () {
     if (
       (spot1.hasClass("o") && spot2.hasClass("o") && spot3.hasClass("o")) ||
       (spot1.hasClass("o") && spot4.hasClass("o") && spot7.hasClass("o")) ||
@@ -25,12 +32,7 @@ $(document).ready(function() {
       (spot3.hasClass("o") && spot5.hasClass("o") && spot7.hasClass("o"))
     ) {
       alert("O Won!");
-      // refresh the board
-      $("#board li").text("*");
-      $("#board li").removeClass("disable");
-      $("#board li").removeClass("o");
-      $("#board li").removeClass("x");
-      turns = 0;
+      refreshBoard();
     } else if (
       (spot1.hasClass("x") && spot2.hasClass("x") && spot3.hasClass("x")) ||
       (spot1.hasClass("x") && spot4.hasClass("x") && spot7.hasClass("x")) ||
@@ -42,31 +44,20 @@ $(document).ready(function() {
       (spot3.hasClass("x") && spot5.hasClass("x") && spot7.hasClass("x"))
     ) {
       alert("X Won!");
-      // refresh the board
-      $("#board li").removeClass("disabled");
-      $("#board li").text("*");
-      $("#board li").removeClass("o");
-      $("#board li").removeClass("x");
-      turns = 0;
-    }
-    //all spots are filled and no Winner
-    else if (turns == 9) {
-      alert("its a Tie!");
-      // refresh the board
-      $("#board li").removeClass("disabled");
-      $("#board li").text("*");
-      $("#board li").removeClass("o");
-      $("#board li").removeClass("x");
-      turns = 0;
+      refreshBoard();
     }
     //check if spot has been played
     else if ($(this).hasClass("disabled")) {
       alert("this spot is filled!");
     }
-    //regulate appropriate turn
-    else if (turns % 2 == 0) {
+    //No more turns
+    else if (turns === 9) {
+      alert("its a Tie!");
+      refreshBoard();
+    } //even turns
+    else if (turns % 2 === 0) {
       turns++;
-      $(this).text(o);
+      $(this).text("o");
       $(this).addClass("o disabled"); //turn taken
       if (
         (spot1.hasClass("o") && spot2.hasClass("o") && spot3.hasClass("o")) ||
@@ -82,9 +73,10 @@ $(document).ready(function() {
 
         turns = 0;
       }
-    } else if (turns % 2 != 0) {
+      // odd turns
+    } else if (turns % 2 !== 0) {
       turns++;
-      $(this).text(x);
+      $(this).text("x");
       $(this).addClass("x disabled"); //turn taken
       if (
         (spot1.hasClass("x") && spot2.hasClass("x") && spot3.hasClass("x")) ||
@@ -103,11 +95,7 @@ $(document).ready(function() {
   });
 
   //Reset button
-  $("#reset").on("click", function() {
-    $("#board li").removeClass("disabled");
-    $("#board li").text("*");
-    $("#board li").removeClass("o");
-    $("#board li").removeClass("x");
-    turns = 0;
+  $("#reset").on("click", function () {
+    refreshBoard();
   });
-}); //end of document
+});
