@@ -13,84 +13,72 @@ $(document).ready(function () {
   let spot9 = $("#spot9");
 
   const refreshBoard = () => {
-    boardList.removeClass("disabled");
-    boardList.text("*");
+    boardList.removeClass("filled");
     boardList.removeClass("o");
     boardList.removeClass("x");
-    turns = 0;
+    boardList.text("*");
+  };
+
+  const checkWinFor = (value) => {
+    if (
+      (spot1.hasClass(value) &&
+        spot2.hasClass(value) &&
+        spot3.hasClass(value)) ||
+      (spot1.hasClass(value) &&
+        spot4.hasClass(value) &&
+        spot7.hasClass(value)) ||
+      (spot1.hasClass(value) &&
+        spot5.hasClass(value) &&
+        spot9.hasClass(value)) ||
+      (spot2.hasClass(value) &&
+        spot5.hasClass(value) &&
+        spot8.hasClass(value)) ||
+      (spot4.hasClass(value) &&
+        spot5.hasClass(value) &&
+        spot6.hasClass(value)) ||
+      (spot7.hasClass(value) &&
+        spot8.hasClass(value) &&
+        spot9.hasClass(value)) ||
+      (spot3.hasClass(value) &&
+        spot6.hasClass(value) &&
+        spot9.hasClass(value)) ||
+      (spot3.hasClass(value) && spot5.hasClass(value) && spot7.hasClass(value))
+    ) {
+      return true;
+    } else {
+      return false;
+    }
   };
 
   boardList.on("click", function () {
-    if (
-      (spot1.hasClass("o") && spot2.hasClass("o") && spot3.hasClass("o")) ||
-      (spot1.hasClass("o") && spot4.hasClass("o") && spot7.hasClass("o")) ||
-      (spot1.hasClass("o") && spot5.hasClass("o") && spot9.hasClass("o")) ||
-      (spot2.hasClass("o") && spot5.hasClass("o") && spot8.hasClass("o")) ||
-      (spot4.hasClass("o") && spot5.hasClass("o") && spot6.hasClass("o")) ||
-      (spot7.hasClass("o") && spot8.hasClass("o") && spot9.hasClass("o")) ||
-      (spot3.hasClass("o") && spot6.hasClass("o") && spot9.hasClass("o")) ||
-      (spot3.hasClass("o") && spot5.hasClass("o") && spot7.hasClass("o"))
-    ) {
-      alert("O Won!");
-      refreshBoard();
-    } else if (
-      (spot1.hasClass("x") && spot2.hasClass("x") && spot3.hasClass("x")) ||
-      (spot1.hasClass("x") && spot4.hasClass("x") && spot7.hasClass("x")) ||
-      (spot1.hasClass("x") && spot5.hasClass("x") && spot9.hasClass("x")) ||
-      (spot2.hasClass("x") && spot5.hasClass("x") && spot8.hasClass("x")) ||
-      (spot4.hasClass("x") && spot5.hasClass("x") && spot6.hasClass("x")) ||
-      (spot7.hasClass("x") && spot8.hasClass("x") && spot9.hasClass("x")) ||
-      (spot3.hasClass("x") && spot6.hasClass("x") && spot9.hasClass("x")) ||
-      (spot3.hasClass("x") && spot5.hasClass("x") && spot7.hasClass("x"))
-    ) {
-      alert("X Won!");
-      refreshBoard();
-    }
-    //check if spot has been played
-    else if ($(this).hasClass("disabled")) {
+    if ($(this).hasClass("filled")) {
       alert("this spot is filled!");
-    }
-    //No more turns
-    else if (turns === 9) {
-      alert("its a Tie!");
-      refreshBoard();
-    } //even turns
-    else if (turns % 2 === 0) {
+    } else if (turns % 2 === 0) {
+      //even turns
       turns++;
       $(this).text("o");
-      $(this).addClass("o disabled"); //turn taken
-      if (
-        (spot1.hasClass("o") && spot2.hasClass("o") && spot3.hasClass("o")) ||
-        (spot1.hasClass("o") && spot4.hasClass("o") && spot7.hasClass("o")) ||
-        (spot1.hasClass("o") && spot5.hasClass("o") && spot9.hasClass("o")) ||
-        (spot2.hasClass("o") && spot5.hasClass("o") && spot8.hasClass("o")) ||
-        (spot4.hasClass("o") && spot5.hasClass("o") && spot6.hasClass("o")) ||
-        (spot7.hasClass("o") && spot8.hasClass("o") && spot9.hasClass("o")) ||
-        (spot3.hasClass("o") && spot6.hasClass("o") && spot9.hasClass("o")) ||
-        (spot3.hasClass("o") && spot5.hasClass("o") && spot7.hasClass("o"))
-      ) {
+      $(this).addClass("o filled");
+      if (checkWinFor("o")) {
         alert("O Won!");
-
+        refreshBoard();
         turns = 0;
       }
-      // odd turns
     } else if (turns % 2 !== 0) {
+      // odd turns
       turns++;
       $(this).text("x");
-      $(this).addClass("x disabled"); //turn taken
-      if (
-        (spot1.hasClass("x") && spot2.hasClass("x") && spot3.hasClass("x")) ||
-        (spot1.hasClass("x") && spot4.hasClass("x") && spot7.hasClass("x")) ||
-        (spot1.hasClass("x") && spot5.hasClass("x") && spot9.hasClass("x")) ||
-        (spot2.hasClass("x") && spot5.hasClass("x") && spot8.hasClass("x")) ||
-        (spot4.hasClass("x") && spot5.hasClass("x") && spot6.hasClass("x")) ||
-        (spot7.hasClass("x") && spot8.hasClass("x") && spot9.hasClass("x")) ||
-        (spot3.hasClass("x") && spot6.hasClass("x") && spot9.hasClass("x")) ||
-        (spot3.hasClass("x") && spot5.hasClass("x") && spot7.hasClass("x"))
-      ) {
+      $(this).addClass("x filled");
+      if (checkWinFor("x")) {
         alert("X Won!");
+        refreshBoard();
         turns = 0;
       }
+    }
+    //No more turns
+    if (turns === 9) {
+      alert("its a Tie!");
+      refreshBoard();
+      turns = 0;
     }
   });
 
