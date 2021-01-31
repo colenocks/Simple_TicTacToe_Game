@@ -1,0 +1,25 @@
+{
+  "name": "simple_tictactoe_game",
+  "version": "1.0.0",
+  "description": "This is a simple tic-tac-toe web application made using HTML, CSS and JQuery, and served using Express JS.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/colenocks/Simple_TicTacToe_Game.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/colenocks/Simple_TicTacToe_Game/issues"
+  },
+  "homepage": "https://github.com/colenocks/Simple_TicTacToe_Game#readme"
+}
