@@ -1,10 +1,11 @@
 body {
   background: #ccc;
-  color: #666;
+  color: #555;
   font-family: "Arial", sans-serif;
 }
 
 h1 {
+  font-family: "Potta One", cursive;
   text-align: center;
   color: #fff;
 }
@@ -14,12 +15,70 @@ h1 {
 }
 
 #container {
+  position: absolute;
+  top: 5px;
+  left: calc(50% - 190px);
   width: 380px;
   overflow: auto;
   margin: 40px auto;
   background: #396094;
   padding-bottom: 40px;
   border-radius: 10px;
+}
+
+.modal-container {
+  display: none;
+  position: absolute;
+  z-index: 9999;
+  background: rgba(14, 14, 14, 0.5);
+  width: 100%;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 0;
+}
+
+.modal {
+  position: relative;
+  top: calc(35% - 100px);
+  left: calc(50% - 150px);
+  background: #19aecc;
+  opacity: 0.9;
+  border-bottom: 4px solid #9cd350;
+  width: 300px;
+  min-height: 200px;
+  border-radius: 3px;
+}
+
+.modal-text {
+  font-family: "Potta One", cursive;
+  letter-spacing: 3px;
+  color: #fff;
+  padding: 3rem;
+}
+
+.close-modal {
+  position: absolute;
+  right: 0;
+  font-weight: 900;
+  background: transparent;
+  border: 1px solid#fff;
+  color: #fff;
+  border-radius: 3px;
+}
+
+.close-modal:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  background: #9cd350;
+  color: #fff;
+  border: none;
+  outline: none;
+}
+
+.close-modal:active,
+.close-modal:focus {
+  outline: none;
 }
 
 #board li {
